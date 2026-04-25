@@ -59,7 +59,7 @@
     <span class="cover-amp">&amp;</span><br>
     Nadia
   </div>
-  <p class="cover-date">31 · MEI · 2026</p>
+  <p class="cover-date">20 · JULI · 2025</p>
 
   <!-- recipient block — shown only when ?to= present -->
   <div id="cover-recipient" style="display:none;margin-top:1.5rem;text-align:center;">
@@ -115,7 +115,7 @@
       Nadia
     </div>
     <p class="hero-tagline">Bersatu dalam ikatan suci pernikahan</p>
-    <div class="hero-date-badge">Minggu, 31 Mei 2026</div>
+    <div class="hero-date-badge">Minggu, 20 Juli 2025</div>
 
     <div class="countdown">
       <div class="count-box"><span class="count-num" id="cd-days">00</span><span class="count-label">Hari</span></div>
@@ -256,7 +256,7 @@
         <div class="schedule-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
         <div>
           <p class="schedule-title">Akad Nikah</p>
-          <p class="schedule-time">Minggu, 31 Mei 2026 · 08.00 WIB</p>
+          <p class="schedule-time">Minggu, 20 Juli 2025 · 08.00 WIB</p>
           <p class="schedule-desc">Prosesi ijab qabul disaksikan keluarga dan tamu undangan.</p>
         </div>
       </div>
@@ -264,7 +264,7 @@
         <div class="schedule-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
         <div>
           <p class="schedule-title">Resepsi Pernikahan</p>
-          <p class="schedule-time">Minggu, 31 Mei 2026 · 11.00 – 14.00 WIB</p>
+          <p class="schedule-time">Minggu, 20 Juli 2025 · 11.00 – 14.00 WIB</p>
           <p class="schedule-desc">Pesta perayaan pernikahan bersama seluruh tamu undangan.</p>
         </div>
       </div>
@@ -272,7 +272,7 @@
         <div class="schedule-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div>
           <p class="schedule-title">Ramah Tamah</p>
-          <p class="schedule-time">Minggu, 31 Mei 2026 · 14.00 – 16.00 WIB</p>
+          <p class="schedule-time">Minggu, 20 Juli 2025 · 14.00 – 16.00 WIB</p>
           <p class="schedule-desc">Sesi foto bersama dan hiburan keluarga.</p>
         </div>
       </div>
@@ -456,11 +456,157 @@
       </div>
       <p class="thanks-names">Arkan &amp; Nadia</p>
       <p style="color:var(--gold-light);font-size:0.7rem;letter-spacing:0.2em;margin-top:0.4rem;opacity:0.7;">Beserta keluarga besar</p>
+
+      <!-- amplop CTA -->
+      <button onclick="openAmplop()" style="margin-top:2rem;padding:0.75rem 2rem;background:transparent;border:1px solid rgba(201,169,110,0.5);color:var(--gold-light);font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,color 0.3s;display:inline-flex;align-items:center;gap:0.6rem;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9.5" y1="14.5" x2="14.5" y2="14.5"/></svg>
+        Kirim Hadiah
+      </button>
       <div id="hearts-container" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
     </div>
   </section>
 
 </div><!-- /main -->
+
+
+<!-- ════════════════════════════════════════
+     MODAL — AMPLOP / HADIAH
+     ════════════════════════════════════════ -->
+<div id="modal-amplop" class="modal-overlay" onclick="closeAmplop(event)" aria-modal="true" role="dialog" aria-labelledby="modal-title" style="display:none;">
+  <div class="modal-box">
+
+    <!-- close -->
+    <button class="modal-close" onclick="closeAmplop()" aria-label="Tutup">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- header ornament -->
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <svg width="52" height="52" viewBox="0 0 52 52" class="mx-auto block mb-3" style="opacity:0.7;">
+        <!-- envelope icon stylized -->
+        <rect x="4" y="12" width="44" height="30" rx="3" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+        <path d="M4 14 L26 30 L48 14" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M4 42 L18 28 M48 42 L34 28" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.5"/>
+        <!-- star decoration -->
+        <path d="M26,3 L27.2,7 L31.4,7 L28.1,9.5 L29.3,13.5 L26,11 L22.7,13.5 L23.9,9.5 L20.6,7 L24.8,7 Z" fill="#c9a96e" opacity="0.8"/>
+      </svg>
+      <p class="modal-label">Hadiah Pernikahan</p>
+      <h2 class="modal-title" id="modal-title">Amplop Digital</h2>
+      <p class="modal-subtitle">
+        Doa dan kehadiran Anda adalah hadiah terbaik bagi kami.<br>
+        Namun jika Anda ingin memberikan hadiah, berikut informasinya.
+      </p>
+    </div>
+
+    <!-- rekening cards -->
+    <div class="rek-list">
+
+      <!-- BCA -->
+      <div class="rek-card">
+        <div class="rek-bank-row">
+          <div class="rek-bank-logo rek-bca">BCA</div>
+          <span class="rek-bank-name">Bank Central Asia</span>
+        </div>
+        <p class="rek-name-label">Atas nama</p>
+        <p class="rek-holder">Ahmad Arkan Maulana</p>
+        <div class="rek-number-row">
+          <span class="rek-number" id="rek-bca">1234 5678 90</span>
+          <button class="rek-copy-btn" onclick="copyRek('rek-bca', this)" title="Salin nomor rekening">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Salin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mandiri -->
+      <div class="rek-card">
+        <div class="rek-bank-row">
+          <div class="rek-bank-logo rek-mandiri">Mandiri</div>
+          <span class="rek-bank-name">Bank Mandiri</span>
+        </div>
+        <p class="rek-name-label">Atas nama</p>
+        <p class="rek-holder">Nadia Salsabila Azzahra</p>
+        <div class="rek-number-row">
+          <span class="rek-number" id="rek-mandiri">1400 0987 6543 21</span>
+          <button class="rek-copy-btn" onclick="copyRek('rek-mandiri', this)" title="Salin nomor rekening">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Salin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- GoPay / Dana -->
+      <div class="rek-card">
+        <div class="rek-bank-row">
+          <div class="rek-bank-logo rek-ewallet">E-Wallet</div>
+          <span class="rek-bank-name">GoPay / Dana / OVO</span>
+        </div>
+        <p class="rek-name-label">Atas nama</p>
+        <p class="rek-holder">Ahmad Arkan Maulana</p>
+        <div class="rek-number-row">
+          <span class="rek-number" id="rek-ewallet">0812 3456 7890</span>
+          <button class="rek-copy-btn" onclick="copyRek('rek-ewallet', this)" title="Salin nomor">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Salin</span>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /rek-list -->
+
+    <p class="modal-footer-note">
+      🤍 Jazakallah khairan atas perhatian dan kebaikan Anda
+    </p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     AUDIO PLAYER (background music)
+     Ganti src dengan file musik Anda.
+     Disarankan: format .mp3, max 5MB
+     ════════════════════════════════════════ -->
+<audio id="bg-music" loop preload="auto">
+  <!-- Ganti URL di bawah dengan file musik Anda -->
+  <source src="assets/music/wedding.mp3" type="audio/mpeg">
+  <!-- fallback online — nasyid instrumental -->
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_2b5a49e2e8.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- ════════════════════════════════════════
+     FLOATING ACTION BUTTONS
+     (music + amplop)
+     ════════════════════════════════════════ -->
+<div class="fab-group" id="fab-group" style="display:none;">
+
+  <!-- Music toggle -->
+  <button class="fab fab-music" id="fab-music" onclick="toggleMusic()" title="Play / Pause musik">
+    <!-- note icon (playing state) -->
+    <svg id="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 18V5l12-2v13"/>
+      <circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+    </svg>
+    <!-- pause icon (will swap in) -->
+    <svg id="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+      <rect x="6" y="4" width="4" height="16" rx="1"/>
+      <rect x="14" y="4" width="4" height="16" rx="1"/>
+    </svg>
+    <!-- music note spin ring -->
+    <span class="fab-music-ring" id="fab-ring"></span>
+  </button>
+  <span class="fab-tooltip" id="fab-music-tip">Musik</span>
+
+  <!-- Amplop button -->
+  <button class="fab fab-amplop" id="fab-amplop" onclick="openAmplop()" title="Amplop digital">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16"/>
+      <path d="M21.5 16l-3 3"/>
+    </svg>
+  </button>
+  <span class="fab-tooltip" id="fab-amplop-tip">Amplop</span>
+
+</div>
 
 
 <!-- ════════════════════════════════════════

@@ -644,6 +644,180 @@ section { padding: 4rem 1.5rem; max-width: 480px; margin: 0 auto; }
 
 
 /* ══════════════════════════════
+   MODAL — AMPLOP
+   ══════════════════════════════ */
+@keyframes modalIn  { from { opacity:0; transform: translateY(24px) scale(0.97); } to { opacity:1; transform: translateY(0) scale(1); } }
+@keyframes overlayIn{ from { opacity:0; } to   { opacity:1; } }
+
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(44,26,14,0.72);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: overlayIn 0.3s ease;
+  padding: 0;
+}
+/* on wider screens center it */
+@media (min-width: 480px) {
+  .modal-overlay { align-items: center; padding: 1.5rem; }
+}
+
+.modal-box {
+  background: var(--cream);
+  width: 100%; max-width: 460px;
+  max-height: 92vh; overflow-y: auto;
+  padding: 2.5rem 1.75rem 2rem;
+  position: relative;
+  animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  border-top: 3px solid var(--gold);
+  /* scrollbar styling */
+  scrollbar-width: thin; scrollbar-color: var(--gold-light) transparent;
+}
+@media (min-width: 480px) {
+  .modal-box { border-top: none; border: 1px solid var(--gold-light); border-top: 3px solid var(--gold); }
+}
+
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: none; border: 1px solid var(--gold-dim);
+  color: var(--brown-light); width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.modal-close:hover { background: var(--gold); color: var(--brown); border-color: var(--gold); }
+
+.modal-label    { font-size:0.62rem; letter-spacing:0.45em; text-transform:uppercase; color:var(--sage); margin-bottom:0.3rem; }
+.modal-title    { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-style:italic; font-weight:300; color:var(--brown); margin-bottom:0.75rem; }
+.modal-subtitle { font-size:0.78rem; color:var(--brown-light); line-height:1.75; max-width:320px; margin:0 auto; }
+
+/* ── Rekening cards ── */
+.rek-list { display:flex; flex-direction:column; gap:0.85rem; margin-bottom:1.5rem; }
+
+.rek-card {
+  background: white;
+  border: 1px solid var(--gold-light);
+  padding: 1.1rem 1.25rem;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.rek-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.rek-card:hover { box-shadow: 0 3px 16px rgba(92,61,46,0.1); }
+
+.rek-bank-row   { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem; }
+.rek-bank-logo  {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em;
+  border-radius: 2px; flex-shrink: 0;
+}
+.rek-bca      { background:#0066ae; color:white; }
+.rek-mandiri  { background:#003d7c; color:#f0a500; }
+.rek-ewallet  { background: linear-gradient(135deg,#00adef,#4caf50); color:white; }
+
+.rek-bank-name  { font-size:0.75rem; color:var(--brown-light); letter-spacing:0.05em; }
+.rek-name-label { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.25em; color:var(--sage); margin-bottom:0.2rem; }
+.rek-holder     { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--brown); margin-bottom:0.75rem; }
+
+.rek-number-row {
+  display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
+  background: var(--cream); padding: 0.6rem 0.9rem;
+  border: 1px dashed var(--gold-light);
+}
+.rek-number {
+  font-family: 'Jost', monospace; font-size:1rem;
+  font-weight:500; letter-spacing:0.12em; color:var(--brown);
+  user-select:all;
+}
+.rek-copy-btn {
+  display:flex; align-items:center; gap:0.35rem;
+  background: var(--brown); color: var(--cream);
+  border:none; padding:0.4rem 0.75rem;
+  font-family:'Jost',sans-serif; font-size:0.62rem;
+  letter-spacing:0.15em; text-transform:uppercase;
+  cursor:pointer; transition: background 0.25s, color 0.25s;
+  flex-shrink:0; white-space:nowrap;
+}
+.rek-copy-btn:hover { background:var(--gold); color:var(--brown); }
+.rek-copy-btn.copied { background:#4caf50; color:white; }
+
+.modal-footer-note {
+  text-align:center; font-size:0.75rem;
+  color:var(--sage); font-style:italic; line-height:1.7;
+  padding-top:0.75rem; border-top:1px solid rgba(201,169,110,0.2);
+}
+
+/* ══════════════════════════════
+   FLOATING ACTION BUTTONS
+   ══════════════════════════════ */
+.fab-group {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 5.5rem;   /* sits above sticky nav */
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+}
+
+.fab {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.fab:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(0,0,0,0.3); }
+.fab:active { transform: scale(0.95); }
+
+/* music fab */
+.fab-music {
+  background: var(--brown);
+  color: var(--gold-light);
+  overflow: visible;
+}
+.fab-music.is-playing { background: var(--gold); color: var(--brown); }
+
+/* spinning ring around music fab when playing */
+@keyframes spin-ring { to { transform: rotate(360deg); } }
+.fab-music-ring {
+  position: absolute; inset: -5px; border-radius: 50%;
+  border: 2px dashed rgba(201,169,110,0.5);
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.3s;
+}
+.fab-music.is-playing .fab-music-ring {
+  opacity: 1;
+  animation: spin-ring 6s linear infinite;
+}
+
+/* amplop fab */
+.fab-amplop {
+  background: linear-gradient(135deg, var(--brown-mid), var(--brown));
+  color: var(--gold-light);
+}
+.fab-amplop:hover { background: linear-gradient(135deg, var(--gold), #b8904e); color: var(--brown); }
+
+/* tooltip labels */
+.fab-tooltip {
+  position: absolute; right: 56px;
+  background: var(--brown-dark); color: var(--gold-light);
+  font-family: 'Jost', sans-serif; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.3rem 0.65rem; white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateX(6px);
+}
+.fab:hover + .fab-tooltip {
+  opacity: 1; transform: translateX(0);
+}
+
+/* ══════════════════════════════
    RESPONSIVE
    ══════════════════════════════ */
 @media (min-width: 480px) {

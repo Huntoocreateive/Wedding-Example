@@ -53,9 +53,22 @@ function openInvitation() {
   document.getElementById('cover').classList.add('hidden');
   document.getElementById('main').classList.add('visible');
   document.getElementById('sticky-nav').classList.add('visible');
+
+  // show floating action buttons
+  const fab = document.getElementById('fab-group');
+  if (fab) {
+    fab.style.display = 'flex';
+    fab.style.opacity = '0'; fab.style.transition = 'opacity 0.6s ease 0.8s';
+    requestAnimationFrame(() => requestAnimationFrame(() => { fab.style.opacity = '1'; }));
+  }
+
   startCountdown();
   spawnHearts();
   initScrollSpy();
+  loadWishes();
+
+  // autoplay music — this runs inside a user gesture (button click) so allowed
+  if (window._tryPlayMusic) window._tryPlayMusic();
 }
 
 /* ════════════════════════════
@@ -69,7 +82,7 @@ function scrollToSection(id) {
    COUNTDOWN
    ════════════════════════════ */
 function startCountdown() {
-  const target = new Date('2026-05-31T08:00:00+07:00').getTime();
+  const target = new Date('2025-07-20T08:00:00+07:00').getTime();
   function tick() {
     const diff = target - Date.now();
     if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent='00'); return; }
@@ -190,6 +203,10 @@ async function submitWish() {
 
     /* scroll ke list setelah animasi */
     setTimeout(() => list.scrollIntoView({ behavior: 'smooth', block: 'start' }), 400);
+
+    /* reload dari server setelah 2 detik */
+    setTimeout(loadWishes, 2000);
+
   } catch (err) {
     console.error('submitWish:', err);
     showToast(toast, '❌ Gagal mengirim. Coba lagi.', 'error');
@@ -197,7 +214,6 @@ async function submitWish() {
     btn.disabled = false;
     btn.querySelector('.btn-text').style.display    = 'flex';
     btn.querySelector('.btn-spinner').style.display = 'none';
-    loadWishes();
   }
 }
 
@@ -303,7 +319,7 @@ function initScrollSpy() {
 document.addEventListener('DOMContentLoaded', () => {
   initRecipient();
   initCharCounter();
-  loadWishes();
+  initMusic();   // prepare audio + UI — actual play triggered by openInvitation()
 
   /* scroll reveal */
   const ro = new IntersectionObserver(entries => {
@@ -311,3 +327,111 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 });
+
+/* ════════════════════════════════════════
+   MUSIC PLAYER
+   ════════════════════════════════════════ */
+let musicReady = false;
+
+function initMusic() {
+  const audio   = document.getElementById('bg-music');
+  const fab     = document.getElementById('fab-music');
+  const iconP   = document.getElementById('icon-play');
+  const iconPa  = document.getElementById('icon-pause');
+  const ring    = document.getElementById('fab-ring');
+  const tip     = document.getElementById('fab-music-tip');
+
+  if (!audio) return;
+
+  /* Try autoplay — browsers may block until user interaction.
+     We start it on openInvitation() which IS a user gesture.   */
+  audio.volume = 0.5;
+
+  const tryPlay = () => {
+    audio.play()
+      .then(() => {
+        setPlayingUI(true);
+        musicReady = true;
+      })
+      .catch(() => {
+        /* autoplay blocked — will play on first toggle */
+        setPlayingUI(false);
+        musicReady = false;
+      });
+  };
+
+  // expose tryPlay so openInvitation can call it
+  window._tryPlayMusic = tryPlay;
+
+  audio.addEventListener('play',  () => setPlayingUI(true));
+  audio.addEventListener('pause', () => setPlayingUI(false));
+  audio.addEventListener('ended', () => setPlayingUI(false));
+
+  function setPlayingUI(playing) {
+    fab.classList.toggle('is-playing', playing);
+    iconP.style.display  = playing ? 'none'  : 'block';
+    iconPa.style.display = playing ? 'block' : 'none';
+    tip.textContent      = playing ? 'Jeda'  : 'Putar';
+  }
+}
+
+function toggleMusic() {
+  const audio = document.getElementById('bg-music');
+  if (!audio) return;
+  if (audio.paused) {
+    audio.play().catch(console.error);
+  } else {
+    audio.pause();
+  }
+}
+
+/* ════════════════════════════════════════
+   MODAL AMPLOP
+   ════════════════════════════════════════ */
+function openAmplop() {
+  const modal = document.getElementById('modal-amplop');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  // re-trigger animation
+  const box = modal.querySelector('.modal-box');
+  box.style.animation = 'none';
+  requestAnimationFrame(() => { box.style.animation = ''; });
+}
+
+function closeAmplop(e) {
+  if (e && e.target !== document.getElementById('modal-amplop')) return;
+  const modal = document.getElementById('modal-amplop');
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// close on Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeAmplop();
+});
+
+/* ════════════════════════════════════════
+   COPY REKENING
+   ════════════════════════════════════════ */
+async function copyRek(id, btn) {
+  const text = document.getElementById(id)?.textContent?.replace(/\s/g, '').trim();
+  if (!text) return;
+
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    // fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+
+  // visual feedback on button
+  const span = btn.querySelector('span');
+  const prev = span.textContent;
+  span.textContent = '✓ Disalin!';
+  btn.classList.add('copied');
+  setTimeout(() => { span.textContent = prev; btn.classList.remove('copied'); }, 2000);
+}
